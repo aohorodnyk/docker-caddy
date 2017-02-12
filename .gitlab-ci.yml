@@ -9,8 +9,7 @@ build:caddy:
     PLUGINS: ""
   script:
     - apk add --no-cache openssh-client tar curl
-    - curl --silent --show-error --fail --location \
-        --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+    - curl --silent --show-error --fail --location -o - \
         "https://caddyserver.com/download/build?os=linux&arch=${ARCHITECTURE}&features=${PLUGINS}" \
       | tar --no-same-owner -xz caddy
     - chmod 0755 caddy
