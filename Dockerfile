@@ -1,9 +1,10 @@
 FROM scratch
 
-ADD caddy /caddy
+ENV HOME /data
 
-VOLUME /var/log/lego
-VOLUME /etc
+COPY caddy /caddy
+VOLUME /data
+
+EXPOSE 80 443
 
 ENTRYPOINT ['/caddy']
-CMD ["--conf", "/etc/Caddyfile"]
