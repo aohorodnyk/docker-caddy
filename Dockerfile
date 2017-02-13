@@ -3,7 +3,7 @@ FROM scratch
 ENV HOME /data
 
 COPY caddy /caddy
-VOLUME /data /etc
+VOLUME /data /etc /logs
 
 EXPOSE 80 443
 
