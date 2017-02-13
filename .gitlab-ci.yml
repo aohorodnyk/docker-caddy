@@ -12,7 +12,7 @@ build:caddy:
     - curl --silent --show-error --fail --location -k -o caddy_linux_amd64_custom.tar.gz "https://caddyserver.com/download/build?os=linux&arch=${ARCHITECTURE}&features=${PLUGINS}"
     - tar --no-same-owner -zxvf caddy_linux_amd64_custom.tar.gz caddy
     - chmod 0755 caddy
-    - caddy -version
+    - ./caddy -version
   artifacts:
     when: on_success
     expire_in: 3 days
