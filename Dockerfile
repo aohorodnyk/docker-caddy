@@ -1,7 +1,12 @@
-FROM scratch
+FROM alpine:3.5
 
-ADD caddy /caddy
+ENV HOME /opt/data
 
-VOLUME /var/lego
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
-ENTRYPOINT ['/caddy']
+COPY caddy /caddy
+VOLUME /opt/data /etc/caddy /var/log/caddy
+
+EXPOSE 80 443
+
+CMD ["/caddy", "--conf", "/etc/caddy/Caddyfile"]
