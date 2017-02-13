@@ -1,6 +1,6 @@
 stages:
   - download_caddy
-  # - build_docker
+  - build_docker
 build:caddy:
   stage: download_caddy
   image: alpine:3.5
@@ -18,15 +18,20 @@ build:caddy:
     expire_in: 3 days
     paths:
       - caddy
-# build:docker:
-#   stage: build_docker
-#   dependencies:
-#     - build:caddy
-#   image: docker:latest
-#   services:
-#     - docker:dind
-#   script:
-#     - docker info
-#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.c.discort.com
-#     - docker build -t registry.c.discort.com/advanced-british-education/backend:test .
-#     - docker push registry.c.discort.com/advanced-british-education/backend:test
+
+build:docker:
+  image: docker:latest
+  stage: build_docker
+  variables:
+    PROJECT_NAME: "caddy"
+  dependencies:
+    - build:caddy
+  services:
+    - docker:dind
+  script:
+    - docker info
+    - docker login -u$DOCKER_HUB_USER -p$DOCKER_HUB_PASSWORD
+    - docker build -t aohorodnyk/${PROJECT_NAME}:$CI_BUILD_REF_NAME .
+    - docker push aohorodnyk/${PROJECT_NAME}:$CI_BUILD_REF_NAME
+    - docker tag aohorodnyk/${PROJECT_NAME}:$CI_BUILD_REF_NAME aohorodnyk/${PROJECT_NAME}:latest
+    - docker push aohorodnyk/${PROJECT_NAME}:latest
