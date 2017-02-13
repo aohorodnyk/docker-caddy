@@ -1,11 +1,11 @@
 FROM scratch
 
-ENV HOME /data
+ENV HOME /opt/data
 
 COPY caddy /caddy
-VOLUME /data /etc /logs
+VOLUME /opt/data /etc/caddy /var/log/caddy
 
 EXPOSE 80 443
 
 ENTRYPOINT ['/caddy']
-CMD ["--conf", "/etc/Caddyfile"]
+CMD ["--conf", "/etc/caddy/Caddyfile"]
