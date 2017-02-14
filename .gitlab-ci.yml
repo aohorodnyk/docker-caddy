@@ -59,5 +59,3 @@ build:docker:latest:
     - DOCKER_VERSION_MAJOR=$(./caddy --version | grep -o '[0-9]\+' | head -1)
     - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MAJOR}
     - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MAJOR}
-  only:
-    - master
