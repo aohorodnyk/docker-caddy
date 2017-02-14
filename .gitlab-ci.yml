@@ -46,12 +46,17 @@ build:docker:latest:
   services:
     - docker:dind
   script:
+    - DOCKER_VERSION_FULL=$(./caddy --version | grep -o '[0-9\.]\+' | head -1)
+    - DOCKER_VERSION_MINOR=$(./caddy --version | grep -o '[0-9]\+\.[0-9]\+' | head -1)
     - docker info
     - docker login -u$DOCKER_HUB_USER -p$DOCKER_HUB_PASSWORD
     - docker build -t aohorodnyk/${PROJECT_NAME}:latest .
     - docker push aohorodnyk/${PROJECT_NAME}:latest
-    - DOCKER_VERSION=$(./caddy --version | grep -o '[0-9\.]\+')
-    - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION}
-    - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION}
+    - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_FULL}
+    - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_FULL}
+    - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MINOR}
+    - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MINOR}
+    - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:$(./caddy --version | grep -o '[0-9]\+' | head -1)
+    - docker push aohorodnyk/${PROJECT_NAME}:$(./caddy --version | grep -o '[0-9]\+' | head -1)
   only:
     - master
