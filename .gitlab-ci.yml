@@ -48,5 +48,6 @@ build:docker:latest:
   script:
     - DOCKER_VERSION_FULL=$(./caddy --version | grep -o '[0-9\.]\+' | head -1)
     - DOCKER_VERSION_MINOR=$(./caddy --version | grep -o '[0-9]\+\.[0-9]\+' | head -1)
-    - DOCKER_VERSION_MAJOR=$(./caddy --version | grep -o '[0-9]\+' | head -1)- docker info
+    - DOCKER_VERSION_MAJOR=$(./caddy --version | grep -o '[0-9]\+' | head -1)
+    - docker info
     
