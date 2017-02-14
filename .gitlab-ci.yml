@@ -46,10 +46,9 @@ build:docker:latest:
   services:
     - docker:dind
   script:
-    - /bin/sh --help
-    - DOCKER_VERSION_FULL="$(./caddy --version | grep -o '[0-9\.]\+' | head -1)"
-    - DOCKER_VERSION_MINOR="$(./caddy --version | grep -o '[0-9]\+\.[0-9]\+' | head -1)"
-    - DOCKER_VERSION_MAJOR="$(./caddy --version | grep -o '[0-9]\+' | head -1)"
+    - DOCKER_VERSION_FULL="v$(./caddy --version | grep -o '[0-9\.]\+' | head -1)"
+    - DOCKER_VERSION_MINOR="v$(./caddy --version | grep -o '[0-9]\+\.[0-9]\+' | head -1)"
+    - DOCKER_VERSION_MAJOR="v$(./caddy --version | grep -o '[0-9]\+' | head -1)"
     - docker info
     - docker login -u$DOCKER_HUB_USER -p$DOCKER_HUB_PASSWORD
     - docker build -t aohorodnyk/${PROJECT_NAME}:latest \
