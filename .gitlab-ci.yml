@@ -48,7 +48,7 @@ build:docker:latest:
   script:
     - DOCKER_VERSION_FULL=$(./caddy --version | grep -o '[0-9\.]\+' | head -1)
     - DOCKER_VERSION_MINOR=$(echo $DOCKER_VERSION_FULL | grep -o '[0-9]\+\.[0-9]\+' | head -1)
-    - DOCKER_VERSION_PATCH=$(echo $DOCKER_VERSION_MINOR | grep -o '[0-9]\+' | head -1)
+    - DOCKER_VERSION_MAJOR=$(echo $DOCKER_VERSION_MINOR | grep -o '[0-9]\+' | head -1)
     - docker info
     - docker login -u$DOCKER_HUB_USER -p$DOCKER_HUB_PASSWORD
     - docker build -t aohorodnyk/${PROJECT_NAME}:latest .
@@ -57,7 +57,7 @@ build:docker:latest:
     - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_FULL}
     - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MINOR}
     - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MINOR}
-    - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_PATCH}
-    - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_PATCH}
+    - docker tag aohorodnyk/${PROJECT_NAME}:latest aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MAJOR}
+    - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MAJOR}
   only:
     - master
