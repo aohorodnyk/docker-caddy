@@ -3,7 +3,7 @@ stages:
   - build_docker
 build:caddy:
   stage: download_caddy
-  image: alpine:3.5
+  image: alpine:3.6
   variables:
     ARCHITECTURE: "amd64"
     PLUGINS: ""
