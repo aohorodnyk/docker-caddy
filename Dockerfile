@@ -4,9 +4,8 @@ ENV PLUGINS ""
 
 WORKDIR /tmp
 
-RUN apk --no-cache add ca-certificates curl jq
-RUN HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r ".name" | grep -o "[0-9\.]\+" | head -1) \
-    && curl -L "https://caddyserver.com/download/linux/amd64?plugins=${PLUGINS}"  | tar -xz
+RUN apk --no-cache add ca-certificates curl
+RUN curl -L "https://caddyserver.com/download/linux/amd64?plugins=${PLUGINS}" | tar -xz
 
 
 FROM alpine:3.6
