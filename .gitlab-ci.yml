@@ -24,3 +24,5 @@ build:docker:latest:
     - docker push aohorodnyk/${PROJECT_NAME}:${DOCKER_VERSION_MAJOR}
   only:
     - master
+  tags:
+    - docker
