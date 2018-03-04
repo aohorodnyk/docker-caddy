@@ -1,4 +1,4 @@
-# caddy
+# Minimalist Caddy Docker Image
 
 A minimalist [Docker](https://docker.com) image for [Caddy](https://caddyserver.com) based on [alpine linux](https://hub.docker.com/r/_/alpine/). This image doesn't include any plugins, but can be simplest added by gitlab-ci.
 [Source Repo](https://github.com/aohorodnyk/docker-caddy/)
