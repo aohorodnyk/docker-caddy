@@ -5,7 +5,7 @@ ENV PLUGINS ""
 WORKDIR /tmp
 
 RUN apk --no-cache add ca-certificates curl
-RUN curl -L "https://caddyserver.com/download/linux/amd64?plugins=${PLUGINS}" | tar -xz
+RUN curl -L "https://caddyserver.com/download/linux/amd64?plugins=${PLUGINS}&license=personal" | tar -xz
 
 
 FROM alpine:latest
