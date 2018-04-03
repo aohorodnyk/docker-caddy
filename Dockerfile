@@ -19,4 +19,4 @@ VOLUME /opt/data /etc/caddy /var/log/caddy
 
 EXPOSE 80 443
 
-CMD ["caddy", "--conf", "/etc/caddy/Caddyfile"]
+CMD ["caddy", "--conf", "/etc/caddy/Caddyfile", "-agree"]
